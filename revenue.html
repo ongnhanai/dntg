@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Thu Chi DNTG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Thêm Font Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+        }
+        /* Custom scrollbar for dark theme */
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #1f2937; /* gray-800 */
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #4b5563; /* gray-600 */
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; /* gray-500 */
+        }
+        /* Shake animation for error */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .error-shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+<body class="antialiased h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-cyan-500 text-gray-900 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl shadow-lg shadow-cyan-500/20">
+                    TG
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold leading-tight tracking-wide text-white">Sổ Quản Lý Thu Chi</h1>
+                    <p class="text-cyan-400 text-xs font-medium">Nhân viên tài chính AI phụ trách</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <!-- Backup Buttons -->
+                <button onclick="exportData()" class="text-sm bg-gray-700 hover:bg-gray-600 text-gray-200 px-3 py-1.5 rounded transition border border-gray-600 shadow-sm" title="Tải file dữ liệu về máy">
+                    <i class="fas fa-download mr-1 text-cyan-400"></i> Sao lưu
+                </button>
+                <label class="text-sm bg-gray-700 hover:bg-gray-600 text-gray-200 px-3 py-1.5 rounded transition border border-gray-600 shadow-sm cursor-pointer" title="Phục hồi từ file backup">
+                    <i class="fas fa-upload mr-1 text-emerald-400"></i> Phục hồi
+                    <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
+                </label>
+                <div class="w-px h-6 bg-gray-600 mx-1"></div>
+                <button onclick="clearAllData()" class="text-sm bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 px-3 py-1.5 rounded transition shadow-sm">
+                    <i class="fas fa-trash-alt mr-1"></i> Xóa hết
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
+        
+        <!-- Filter Controls -->
+        <div class="flex justify-between items-end">
+            <h2 class="text-lg font-bold text-gray-200"><i class="fas fa-chart-pie mr-2 text-cyan-500"></i>Tổng Quan Tình Hình</h2>
+            <div class="flex items-center gap-2">
+                <label for="monthFilter" class="text-sm font-medium text-gray-400">Xem theo:</label>
+                <select id="monthFilter" class="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-cyan-500 font-medium">
+                    <option value="all">Tất cả thời gian</option>
+                    <option value="1">Tháng 1</option>
+                    <option value="2">Tháng 2</option>
+                    <option value="3">Tháng 3</option>
+                    <option value="4">Tháng 4</option>
+                    <option value="5">Tháng 5</option>
+                    <option value="6">Tháng 6</option>
+                    <option value="7">Tháng 7</option>
+                    <option value="8">Tháng 8</option>
+                    <option value="9">Tháng 9</option>
+                    <option value="10">Tháng 10</option>
+                    <option value="11">Tháng 11</option>
+                    <option value="12">Tháng 12</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Dashboard / Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-xl shadow-lg p-5 border border-gray-700 border-l-4 border-l-emerald-500 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl"></div>
+                <div class="relative z-10">
+                    <p class="text-sm text-gray-400 font-medium mb-1">Tổng Doanh Thu (Có)</p>
+                    <h3 class="text-2xl font-extrabold text-emerald-400 tracking-tight" id="totalIncome">0 ₫</h3>
+                </div>
+                <div class="bg-emerald-500/20 text-emerald-400 p-3 rounded-full relative z-10 border border-emerald-500/20">
+                    <i class="fas fa-arrow-down text-xl"></i>
+                </div>
+            </div>
+            <div class="bg-gray-800 rounded-xl shadow-lg p-5 border border-gray-700 border-l-4 border-l-rose-500 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-rose-500/10 rounded-full blur-xl"></div>
+                <div class="relative z-10">
+                    <p class="text-sm text-gray-400 font-medium mb-1">Tổng Thanh Toán (Chi)</p>
+                    <h3 class="text-2xl font-extrabold text-rose-400 tracking-tight" id="totalExpense">0 ₫</h3>
+                </div>
+                <div class="bg-rose-500/20 text-rose-400 p-3 rounded-full relative z-10 border border-rose-500/20">
+                    <i class="fas fa-arrow-up text-xl"></i>
+                </div>
+            </div>
+            <div class="bg-gray-800 rounded-xl shadow-lg p-5 border border-gray-700 border-l-4 border-l-cyan-500 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl"></div>
+                <div class="relative z-10">
+                    <p class="text-sm text-gray-400 font-medium mb-1">Tồn Quỹ / Số Dư</p>
+                    <h3 class="text-2xl font-extrabold text-cyan-400 tracking-tight" id="totalBalance">0 ₫</h3>
+                </div>
+                <div class="bg-cyan-500/20 text-cyan-400 p-3 rounded-full relative z-10 border border-cyan-500/20">
+                    <i class="fas fa-wallet text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat / Input Area -->
+        <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden flex flex-col md:flex-row">
+            <div class="bg-gray-800/50 p-6 md:w-1/3 flex flex-col justify-center border-b md:border-b-0 md:border-r border-gray-700 relative">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+                <div class="flex items-start gap-3 mb-2">
+                    <img src="https://ui-avatars.com/api/?name=AI&background=06b6d4&color=fff&rounded=true&bold=true" alt="Avatar" class="w-10 h-10 shadow-sm border border-cyan-500/30">
+                    <div class="bg-gray-700 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-gray-300 border border-gray-600">
+                        <p class="mb-2 font-bold text-cyan-400">Kế toán AI đang trực sếp ơi!</p>
+                        <p class="mb-2">Cú pháp nhắn lệnh đơn giản:</p>
+                        <ul class="list-disc pl-4 text-gray-400 space-y-1">
+                            <li><code class="bg-gray-900 px-1.5 py-0.5 rounded text-emerald-400 font-medium">Thu 100tr Công ty A (Cọc)</code></li>
+                            <li><code class="bg-gray-900 px-1.5 py-0.5 rounded text-rose-400 font-medium">Chi 15.5tr Nhà cung cấp B</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 md:w-2/3 flex flex-col justify-center bg-gray-800 relative">
+                <form id="chatForm" class="relative">
+                    <label for="messageInput" class="block text-sm font-semibold text-gray-300 mb-2">
+                        Nhắn lệnh Thu / Chi vào đây:
+                    </label>
+                    <div class="flex gap-3">
+                        <input type="text" id="messageInput" 
+                            class="flex-1 w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-600 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition outline-none text-lg font-medium shadow-inner"
+                            placeholder="Ví dụ: Thu 50tr Khách hàng VIP..." autocomplete="off">
+                        <button type="submit" 
+                            class="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold transition shadow-lg shadow-cyan-500/30 flex items-center gap-2 whitespace-nowrap border border-cyan-400/50">
+                            <i class="fas fa-paper-plane"></i> <span class="hidden sm:inline">Gửi lệnh</span>
+                        </button>
+                    </div>
+                    <div id="statusMessage" class="absolute -bottom-6 left-0 text-sm opacity-0 transition-opacity duration-300"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Table Data -->
+        <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden flex flex-col flex-grow">
+            <div class="px-6 py-4 border-b border-gray-700 bg-gray-800/80 flex justify-between items-center">
+                <h2 class="text-lg font-bold text-gray-200"><i class="fas fa-table mr-2 text-cyan-500"></i>Sổ Phụ Chi Tiết</h2>
+                <div class="text-sm font-medium px-2 py-1 bg-gray-700 rounded text-gray-300 border border-gray-600" id="recordCount">0 bản ghi</div>
+            </div>
+            
+            <div class="overflow-x-auto table-container flex-grow relative">
+                <table class="w-full text-left border-collapse min-w-[850px]">
+                    <thead class="sticky top-0 bg-gray-900 z-10 shadow-sm">
+                        <tr class="text-gray-400 text-sm tracking-wider uppercase">
+                            <th class="px-4 py-3 border-b border-gray-700 font-semibold w-12 text-center">STT</th>
+                            <th class="px-4 py-3 border-b border-gray-700 font-semibold w-40">Ngày giờ</th>
+                            <th class="px-4 py-3 border-b border-gray-700 font-semibold">Khách hàng / NCC</th>
+                            <th class="px-4 py-3 border-b border-gray-700 font-bold text-right w-40 text-emerald-500">Doanh Thu (Có)</th>
+                            <th class="px-4 py-3 border-b border-gray-700 font-bold text-right w-40 text-rose-500">Thanh Toán (Chi)</th>
+                            <th class="px-4 py-3 border-b border-gray-700 font-semibold">Ghi chú</th>
+                            <th class="px-4 py-3 border-b border-gray-700 font-semibold text-center w-20">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-gray-700 bg-gray-800 text-gray-300">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                    <tfoot class="bg-gray-900 sticky bottom-0 border-t-2 border-gray-700 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                        <tr class="font-bold text-gray-200">
+                            <td colspan="3" class="px-4 py-4 text-right tracking-wider uppercase text-sm">Tổng Số Theo Bộ Lọc:</td>
+                            <td class="px-4 py-4 text-right text-emerald-400 text-lg" id="footTotalIncome">0</td>
+                            <td class="px-4 py-4 text-right text-rose-400 text-lg" id="footTotalExpense">0</td>
+                            <td colspan="2" class="px-4 py-4 text-cyan-400 text-lg font-extrabold" id="footTotalBalanceText">Tồn: 0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // State management
+        let transactions = [];
+
+        // Load data on init
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedData = localStorage.getItem('dntg_transactions');
+            if (savedData) {
+                try {
+                    transactions = JSON.parse(savedData);
+                } catch (e) {
+                    console.error("Lỗi đọc dữ liệu:", e);
+                }
+            }
+            // Set current month in filter to current real month optionally, but default is 'all'
+            updateUI();
+        });
+
+        // Lắng nghe thay đổi bộ lọc tháng
+        document.getElementById('monthFilter').addEventListener('change', () => {
+            updateUI();
+        });
+
+        // Form Submission event
+        document.getElementById('chatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputEl = document.getElementById('messageInput');
+            const message = inputEl.value;
+            
+            if(!message.trim()) return;
+
+            try {
+                const parsedData = parseMessage(message);
+                transactions.push(parsedData);
+                saveData();
+                updateUI();
+                inputEl.value = '';
+                showStatus("✅ Đã ghi sổ thành công!", "text-emerald-400");
+            } catch (error) {
+                showStatus("❌ " + error.message, "text-rose-400");
+                inputEl.classList.add('border-rose-500', 'error-shake');
+                setTimeout(() => {
+                    inputEl.classList.remove('border-rose-500', 'error-shake');
+                }, 500);
+            }
+        });
+
+        // NLP Parser function
+        function parseMessage(input) {
+            let str = input.trim();
+            let type = '';
+            
+            // 1. Identify Type
+            if (str.toLowerCase().startsWith('thu')) {
+                type = 'Thu';
+                str = str.substring(3).trim();
+            } else if (str.toLowerCase().startsWith('chi')) {
+                type = 'Chi';
+                str = str.substring(3).trim();
+            } else {
+                throw new Error("Lệnh phải bắt đầu bằng chữ 'Thu' hoặc 'Chi'");
+            }
+
+            // 2. Extract Amount
+            const regex = /^([\d.,]+)\s*(tr|triệu|k|ngàn|nghìn|tỷ|tỉ)?\s*(.*)/i;
+            const match = str.match(regex);
+
+            if (!match) {
+                throw new Error("Không nhận diện được số tiền. VD đúng: Thu 100tr...");
+            }
+
+            let rawNumber = match[1].replace(/,/g, '');
+            let amount = parseFloat(rawNumber);
+            let unit = (match[2] || '').toLowerCase();
+            let restString = match[3];
+
+            if (isNaN(amount)) {
+                throw new Error("Số tiền không hợp lệ.");
+            }
+
+            // Convert units to actual value
+            if (unit === 'tr' || unit === 'triệu') amount *= 1000000;
+            else if (unit === 'k' || unit === 'ngàn' || unit === 'nghìn') amount *= 1000;
+            else if (unit === 'tỷ' || unit === 'tỉ') amount *= 1000000000;
+
+            // 3. Extract Notes and Entity
+            let notes = '';
+            let entity = restString;
+            
+            const notesRegex = /\(([^)]+)\)/;
+            const noteMatch = restString.match(notesRegex);
+            if (noteMatch) {
+                notes = noteMatch[1].trim();
+                entity = restString.replace(notesRegex, '').trim();
+            }
+
+            entity = entity.replace(/^-+|-+$/g, '').trim();
+            if(!entity) {
+                entity = "Chưa xác định";
+            }
+
+            return {
+                id: Date.now().toString(),
+                date: new Date().toISOString(),
+                type: type,
+                amount: amount,
+                entity: entity,
+                notes: notes
+            };
+        }
+
+        // Format Currency
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('vi-VN').format(num) + ' ₫';
+        }
+
+        // Format Date Time
+        function formatDateTime(isoString) {
+            const date = new Date(isoString);
+            const d = date.getDate().toString().padStart(2, '0');
+            const m = (date.getMonth() + 1).toString().padStart(2, '0');
+            const y = date.getFullYear();
+            const h = date.getHours().toString().padStart(2, '0');
+            const min = date.getMinutes().toString().padStart(2, '0');
+            return `${d}/${m}/${y} <span class="text-gray-500 text-xs ml-1 font-medium">${h}:${min}</span>`;
+        }
+
+        // Update UI with Filtering
+        function updateUI() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            let totalIncome = 0;
+            let totalExpense = 0;
+
+            // Get filter value
+            const filterMonth = document.getElementById('monthFilter').value;
+            
+            // Lọc danh sách giao dịch theo tháng
+            let filteredTransactions = transactions;
+            if (filterMonth !== 'all') {
+                filteredTransactions = transactions.filter(t => {
+                    const d = new Date(t.date);
+                    return (d.getMonth() + 1).toString() === filterMonth;
+                });
+            }
+
+            if (filteredTransactions.length === 0) {
+                let emptyMsg = filterMonth === 'all' 
+                    ? "Chưa có dữ liệu. Sếp hãy nhập lệnh phía trên nhé!"
+                    : `Tháng ${filterMonth} chưa có phát sinh giao dịch nào.`;
+                tbody.innerHTML = `<tr><td colspan="7" class="px-4 py-12 text-center text-gray-500 font-medium italic">${emptyMsg}</td></tr>`;
+            } else {
+                filteredTransactions.forEach((t, index) => {
+                    const isThu = t.type === 'Thu';
+                    if (isThu) totalIncome += t.amount;
+                    else totalExpense += t.amount;
+
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-gray-700/50 transition-colors border-b border-gray-700/50 last:border-b-0";
+                    
+                    row.innerHTML = `
+                        <td class="px-4 py-3 text-center text-gray-500 font-medium">${index + 1}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">${formatDateTime(t.date)}</td>
+                        <td class="px-4 py-3 font-semibold text-gray-200">${t.entity}</td>
+                        <td class="px-4 py-3 text-right font-bold text-emerald-400">${isThu ? formatCurrency(t.amount) : '-'}</td>
+                        <td class="px-4 py-3 text-right font-bold text-rose-400">${!isThu ? formatCurrency(t.amount) : '-'}</td>
+                        <td class="px-4 py-3 text-gray-400 text-sm font-medium italic">${t.notes}</td>
+                        <td class="px-4 py-3 text-center">
+                            <button onclick="deleteRow('${t.id}')" class="text-gray-500 hover:text-rose-500 transition-colors" title="Xóa">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            const balance = totalIncome - totalExpense;
+
+            // Update Header Cards
+            document.getElementById('totalIncome').innerText = formatCurrency(totalIncome);
+            document.getElementById('totalExpense').innerText = formatCurrency(totalExpense);
+            
+            const balEl = document.getElementById('totalBalance');
+            balEl.innerText = formatCurrency(balance);
+            balEl.className = balance >= 0 ? "text-2xl font-extrabold text-cyan-400 tracking-tight" : "text-2xl font-extrabold text-rose-500 tracking-tight";
+
+            // Update Footer Total Row
+            document.getElementById('footTotalIncome').innerText = formatCurrency(totalIncome);
+            document.getElementById('footTotalExpense').innerText = formatCurrency(totalExpense);
+            document.getElementById('footTotalBalanceText').innerText = 'Tồn: ' + formatCurrency(balance);
+            
+            // Record count
+            document.getElementById('recordCount').innerText = `${filteredTransactions.length} bản ghi`;
+
+            // Scroll to bottom of table if needed
+            const tableContainer = document.querySelector('.table-container');
+            tableContainer.scrollTop = tableContainer.scrollHeight;
+        }
+
+        // Delete Row
+        window.deleteRow = function(id) {
+            if(confirm("Sếp có chắc chắn muốn xóa bản ghi này không?")) {
+                transactions = transactions.filter(t => t.id !== id);
+                saveData();
+                updateUI();
+                showStatus("Đã xóa bản ghi.", "text-gray-400");
+            }
+        };
+
+        // Clear All
+        window.clearAllData = function() {
+            if(transactions.length === 0) return;
+            if(confirm("CẢNH BÁO: Sếp sắp xóa TOÀN BỘ dữ liệu sổ sách. Khuyên sếp nên 'Sao lưu' trước khi xóa. Sếp vẫn muốn tiếp tục?")) {
+                transactions = [];
+                saveData();
+                updateUI();
+                showStatus("Đã làm sạch toàn bộ dữ liệu.", "text-gray-400");
+            }
+        };
+
+        // Export Data to JSON File
+        window.exportData = function() {
+            if (transactions.length === 0) {
+                alert("Sổ chưa có dữ liệu để sao lưu!");
+                return;
+            }
+            const dataStr = JSON.stringify(transactions, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `DNTG_ThuChi_Backup_${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showStatus("Đã tải file sao lưu về máy!", "text-cyan-400");
+        };
+
+        // Import Data from JSON File
+        window.importData = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        // Hỏi ý kiến xem ghi đè hay cộng dồn
+                        if(confirm("Sếp muốn ghi đè dữ liệu cũ (OK) hay giữ nguyên dữ liệu hiện tại và cộng dồn thêm (Cancel)?")) {
+                            transactions = imported; // Ghi đè
+                        } else {
+                            // Merge and remove duplicates by ID
+                            const merged = [...transactions, ...imported];
+                            const uniqueIds = new Set();
+                            transactions = merged.filter(t => {
+                                if(!uniqueIds.has(t.id)){
+                                    uniqueIds.add(t.id);
+                                    return true;
+                                }
+                                return false;
+                            });
+                        }
+                        
+                        saveData();
+                        // Chuyển view về Tất cả để thấy hết dữ liệu mới import
+                        document.getElementById('monthFilter').value = 'all';
+                        updateUI();
+                        showStatus("Phục hồi dữ liệu thành công!", "text-emerald-400");
+                    } else {
+                        throw new Error("File không đúng cấu trúc.");
+                    }
+                } catch (err) {
+                    alert("Lỗi: File phục hồi không hợp lệ!");
+                }
+            };
+            reader.readAsText(file);
+            // Reset giá trị thẻ input file để có thể import lại đúng file đó nếu cần
+            event.target.value = "";
+        };
+
+        // Save to localStorage
+        function saveData() {
+            localStorage.setItem('dntg_transactions', JSON.stringify(transactions));
+        }
+
+        // Status Feedback UI
+        let statusTimeout;
+        function showStatus(msg, colorClass) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.innerText = msg;
+            statusEl.className = `absolute -bottom-6 left-0 text-sm font-semibold transition-opacity duration-300 ${colorClass}`;
+            statusEl.style.opacity = '1';
+            
+            clearTimeout(statusTimeout);
+            statusTimeout = setTimeout(() => {
+                statusEl.style.opacity = '0';
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
