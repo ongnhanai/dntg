@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNTG CLOUDPBX - Tuyển Dụng & Nộp Hồ Sơ</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff5f2',
+                            100: '#ffe8e1',
+                            500: '#ef5023',
+                            600: '#e54417',
+                            700: '#c8340b',
+                            dark: '#1e293b'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .modal-animate-in {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="w-full shrink-0">
+        <!-- Top Contact Bar -->
+        <div class="bg-brand-500 text-white text-xs md:text-sm py-2 px-4 sm:px-8 flex flex-wrap justify-between items-center shadow-sm">
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <span class="flex items-center gap-1.5 hover:opacity-90 transition cursor-pointer">
+                    <i class="fa-solid fa-envelope"></i> CONTACT
+                </span>
+                <span class="hidden sm:flex items-center gap-1.5 hover:opacity-90 transition">
+                    <i class="fa-regular fa-clock"></i> 08:30 - 17:30
+                </span>
+                <a href="tel:19006020" class="flex items-center gap-1.5 hover:opacity-90 transition font-bold bg-white/10 px-2 py-0.5 rounded">
+                    <i class="fa-solid fa-phone"></i> HOTLINE: 1900 6020
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="hover:underline cursor-pointer">Help Center</span>
+                <div class="flex items-center space-x-1 border-l border-white/40 pl-3">
+                    <span class="cursor-pointer text-base">🇺🇸</span>
+                    <span class="cursor-pointer text-base font-bold">🇻🇳</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Nav Bar -->
+        <nav class="bg-white border-b border-slate-100 shadow-sm sticky top-0 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='?'">
+                    <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+                        <i class="fa-solid fa-cube text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-xl tracking-tight text-slate-900 flex items-center gap-1">
+                            CLOUDPBX <span class="text-xs font-semibold px-1.5 py-0.5 bg-brand-50 text-brand-500 rounded">DTNG</span>
+                        </div>
+                        <p class="text-[9px] text-slate-400 uppercase tracking-widest font-semibold">Kick start your enterprise</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-700 uppercase tracking-wide">
+                    <a href="#" class="hover:text-brand-500 transition">Giới thiệu</a>
+                    <a href="#" class="hover:text-brand-500 transition flex items-center gap-1">Dịch vụ <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i></a>
+                    <a href="#" class="hover:text-brand-500 transition">Bảng giá</a>
+                    <a href="#" class="hover:text-brand-500 transition">Tin tức</a>
+                    <a href="#" class="hover:text-brand-500 transition">Liên hệ</a>
+                    <button class="bg-brand-500 text-white p-2.5 rounded-lg hover:bg-brand-600 transition shadow-sm" title="Tìm kiếm">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Banner Section -->
+        <section class="bg-gradient-to-b from-white to-slate-50 py-12 border-b border-slate-100">
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <span class="inline-block px-3 py-1 bg-brand-50 text-brand-500 text-xs font-semibold rounded-full uppercase tracking-wider mb-3">Gia nhập đội ngũ DTNG</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase mb-3">
+                    TUYỂN DỤNG NHÂN SỰ
+                </h1>
+                <p class="text-slate-500 text-base sm:text-lg max-w-xl mx-auto">
+                    Các vị trí chúng tôi đang tuyển dụng. Hãy đồng hành cùng DTNG kiến tạo những giải pháp viễn thông doanh nghiệp hiện đại.
+                </p>
+            </div>
+        </section>
+
+        <!-- Dynamic Jobs Grid Section -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-brand-500"></i>
+                    Vị Trí Đang Mở Đợt Ứng Tuyển
+                </h2>
+                <span id="job-count-badge" class="text-xs font-semibold px-3 py-1 bg-slate-200 text-slate-700 rounded-full">0 Vị trí</span>
+            </div>
+
+            <!-- Job Cards Container (Injected via JS) -->
+            <div id="jobs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-white text-sm py-8 border-t border-slate-800 shrink-0">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:text-left text-slate-400">
+            <p>© 2026 DTNG CloudPBX System. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0">
+                Email tuyển dụng: <a href="mailto:lamthenhan@gmail.com" class="text-brand-500 font-semibold hover:underline">lamthenhan@gmail.com</a>
+                <span class="mx-2">•</span>
+                Hotline: <a href="tel:19006020" class="text-white font-bold hover:underline">1900 6020</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: Job Details Modal (JD Modal) -->
+    <div id="job-detail-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden modal-animate-in my-8 border border-slate-100 max-h-[90vh] flex flex-col">
+            
+            <div class="bg-slate-900 px-6 py-5 text-white flex justify-between items-start shrink-0 border-b border-slate-800">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2 flex-wrap mb-1">
+                        <span id="jd-salary-badge" class="text-xs font-bold bg-emerald-500 text-white px-2.5 py-0.5 rounded-full"></span>
+                        <span id="jd-location-badge" class="text-xs font-medium bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-full"></span>
+                    </div>
+                    <h3 id="jd-title" class="font-extrabold text-2xl text-white"></h3>
+                    <div class="flex items-center gap-4 text-xs text-slate-400 pt-1">
+                        <span><i class="fa-regular fa-calendar-check text-brand-500 mr-1"></i> Ngày đăng: <strong id="jd-posted-date" class="text-slate-300"></strong></span>
+                        <span><i class="fa-regular fa-hourglass-half text-amber-500 mr-1"></i> Hạn nộp: <strong id="jd-expiry-date" class="text-amber-400"></strong></span>
+                    </div>
+                </div>
+                <button onclick="closeJobDetailModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition shrink-0">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6 text-slate-700 text-sm leading-relaxed">
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-base flex items-center gap-2 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-list-check text-brand-500"></i> Mô Tả Chi Tiết Công Việc
+                    </h4>
+                    <div id="jd-detail-desc" class="whitespace-pre-line text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100"></div>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-base flex items-center gap-2 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-user-check text-brand-500"></i> Yêu Cầu Ứng Viên
+                    </h4>
+                    <div id="jd-requirements" class="whitespace-pre-line text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100"></div>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-base flex items-center gap-2 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-gift text-brand-500"></i> Quyền Lợi Được Hưởng
+                    </h4>
+                    <div id="jd-benefits" class="whitespace-pre-line text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100"></div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 px-6 py-4 border-t border-slate-200 flex flex-wrap gap-3 justify-between items-center shrink-0">
+                <div class="flex items-center gap-2">
+                    <button onclick="closeJobDetailModal()" class="px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-200 rounded-xl transition">
+                        Đóng
+                    </button>
+                    <!-- Share button in JD Modal -->
+                    <button id="btn-jd-share" class="px-4 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-100 rounded-xl transition flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-share-nodes text-brand-500"></i>
+                        <span>Chia sẻ vị trí này</span>
+                    </button>
+                </div>
+                <button id="btn-jd-apply-now" class="px-6 py-2.5 text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 rounded-xl shadow-md shadow-brand-500/30 transition flex items-center gap-2">
+                    <span>Ứng Tuyển Vị Trí Này</span>
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Application Form Modal -->
+    <div id="apply-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden modal-animate-in my-8 border border-slate-100 max-h-[90vh] flex flex-col">
+            
+            <div class="bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-5 text-white flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/10 backdrop-blur rounded-lg flex items-center justify-center text-white">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl leading-tight">Nộp Hồ Sơ Ứng Tuyển</h3>
+                        <p class="text-xs text-white/90">Người nhận: HR Department (lamthenhan@gmail.com)</p>
+                    </div>
+                </div>
+                <button onclick="closeApplyModal()" class="w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center text-white transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="apply-form" onsubmit="handleApplySubmit(event)" class="p-6 space-y-5 overflow-y-auto custom-scrollbar">
+                <!-- 1. Position Selection -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Vị trí muốn ứng tuyển <span class="text-brand-500">*</span></label>
+                    <div class="relative">
+                        <select id="apply-position" required onchange="updateApplyJdPreview(this.value)" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl px-4 py-3 appearance-none focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-4 top-3.5 text-slate-400 pointer-events-none text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Position Preview Box -->
+                <div id="apply-jd-preview" class="bg-brand-50/50 rounded-xl p-3.5 border border-brand-100 text-xs space-y-1">
+                    <div class="flex justify-between items-center text-brand-700 font-bold">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> Tóm tắt vị trí:</span>
+                        <span id="apply-jd-salary" class="bg-white px-2 py-0.5 rounded border border-brand-200 text-brand-600 font-bold"></span>
+                    </div>
+                    <p id="apply-jd-snippet" class="text-slate-600 line-clamp-2"></p>
+                </div>
+
+                <!-- 2. Candidate Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Họ và tên <span class="text-brand-500">*</span></label>
+                        <input type="text" id="applicant-name" required placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Số điện thoại <span class="text-brand-500">*</span></label>
+                        <input type="tel" id="applicant-phone" required placeholder="0901 234 567" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Email liên hệ <span class="text-brand-500">*</span></label>
+                    <input type="email" id="applicant-email" required placeholder="nguyenvana@gmail.com" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                </div>
+
+                <!-- Portfolio Link -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Link Portfolio / LinkedIn / GitHub</label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-2.5 text-slate-400 text-sm"><i class="fa-solid fa-link"></i></span>
+                        <input type="url" id="applicant-portfolio" placeholder="https://linkedin.com/in/nguyenvana" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+                    </div>
+                </div>
+
+                <!-- CV File Upload -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Đính kèm CV (PDF, DOC, DOCX) <span class="text-brand-500">*</span></label>
+                    <div id="drop-zone" class="border-2 border-dashed border-slate-300 hover:border-brand-500 rounded-xl p-4 text-center bg-slate-50 hover:bg-brand-50/30 transition cursor-pointer relative group">
+                        <input type="file" id="applicant-cv" accept=".pdf,.doc,.docx" required onchange="handleFileSelect(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                        <div id="cv-upload-idle" class="space-y-1">
+                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-slate-400 group-hover:text-brand-500 transition"></i>
+                            <p class="text-sm font-medium text-slate-700">Kéo thả file CV vào đây hoặc <span class="text-brand-500 underline">bấm để chọn</span></p>
+                            <p class="text-xs text-slate-400">Định dạng hỗ trợ: PDF, DOC, DOCX (Dung lượng &lt; 10MB)</p>
+                        </div>
+                        <div id="cv-upload-success" class="hidden flex items-center justify-between bg-white p-3 rounded-lg border border-emerald-200">
+                            <div class="flex items-center space-x-3 text-emerald-700">
+                                <i class="fa-solid fa-file-contract text-2xl"></i>
+                                <div class="text-left">
+                                    <p id="cv-filename" class="text-sm font-semibold truncate max-w-xs"></p>
+                                    <p id="cv-filesize" class="text-xs text-emerald-600"></p>
+                                </div>
+                            </div>
+                            <button type="button" onclick="resetCvFile(event)" class="text-xs text-rose-500 hover:text-rose-700 font-semibold p-1">Thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Lời nhắn gửi HR (Không bắt buộc)</label>
+                    <textarea id="applicant-note" rows="2" placeholder="Giới thiệu ngắn gọn hoặc ngày có thể bắt đầu công việc..." class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition"></textarea>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex justify-end items-center gap-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeApplyModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition">
+                        Hủy
+                    </button>
+                    <button type="submit" id="btn-submit-apply" class="px-6 py-2.5 text-sm font-semibold text-white bg-brand-500 hover:bg-brand-600 active:scale-95 rounded-xl shadow-md shadow-brand-500/30 transition flex items-center gap-2">
+                        <span>Gửi Hồ Sơ Ứng Tuyển</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Success Confirmation Modal -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full text-center space-y-5 shadow-2xl modal-animate-in border border-slate-100">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold text-slate-900">Gửi Hồ Sơ Thành Công!</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                    Hồ sơ ứng tuyển & file CV của bạn đã được chuyển tới email Bộ phận Nhân sự DTNG:
+                    <strong class="text-brand-500 font-semibold block text-sm mt-0.5">lamthenhan@gmail.com</strong>
+                </p>
+            </div>
+
+            <!-- Application Summary Box -->
+            <div class="bg-slate-50 p-4 rounded-xl text-xs text-slate-600 text-left space-y-2 border border-slate-200/80">
+                <p class="flex justify-between border-b border-slate-200/60 pb-1.5">
+                    <span class="text-slate-400 font-medium">Ứng viên:</span>
+                    <strong id="confirm-name" class="text-slate-800"></strong>
+                </p>
+                <p class="flex justify-between border-b border-slate-200/60 pb-1.5">
+                    <span class="text-slate-400 font-medium">Vị trí:</span>
+                    <strong id="confirm-position" class="text-brand-600"></strong>
+                </p>
+                <p class="flex justify-between">
+                    <span class="text-slate-400 font-medium">File CV:</span>
+                    <strong id="confirm-cv" class="text-emerald-600 truncate max-w-[200px]"></strong>
+                </p>
+            </div>
+
+            <!-- Hotline Support Box -->
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 text-left text-xs text-amber-800 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div>
+                    <p class="font-bold text-amber-900">Cần hỗ trợ gấp hoặc xác nhận thông tin?</p>
+                    <p class="mt-0.5 text-amber-700">Vui lòng liên hệ Hotline phòng Tuyển dụng: <a href="tel:19006020" class="font-bold underline text-amber-900">1900 6020</a> (Giờ làm việc 08:30 - 17:30).</p>
+                </div>
+            </div>
+
+            <button onclick="closeConfirmModal()" class="w-full py-3 bg-slate-900 hover:bg-black text-white font-bold text-sm rounded-xl transition shadow-md">
+                Đã Hiểu & Đóng
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 4: Admin Management Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/70 backdrop-blur-md p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden modal-animate-in my-8 border border-slate-200">
+            
+            <div class="bg-slate-900 px-6 py-4 text-white flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <div>
+                        <h3 class="font-bold text-lg flex items-center gap-2">
+                            Quản Lý Vị Trí Tuyển Dụng DNTG
+                            <span class="text-[10px] bg-brand-500 text-white font-mono px-2 py-0.5 rounded">ADMIN PANEL</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">Phím tắt kích hoạt: Ctrl + Shift + A</p>
+                    </div>
+                </div>
+                <button onclick="toggleAdminModal(false)" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <!-- Add/Edit Form -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 id="admin-form-title" class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-brand-500"></i> Thêm Vị Trí Tuyển Dụng Mới
+                    </h4>
+                    <form id="admin-job-form" onsubmit="handleSaveJob(event)" class="space-y-4">
+                        <input type="hidden" id="admin-job-id">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Tên vị trí <span class="text-rose-500">*</span></label>
+                                <input type="text" id="admin-job-title" required placeholder="VD: Senior Sales B2B" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Ngày đăng tuyển <span class="text-rose-500">*</span></label>
+                                <input type="date" id="admin-job-date" required class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Ngày hết hạn <span class="text-rose-500">*</span></label>
+                                <input type="date" id="admin-job-expiry" required class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Mức lương hiển thị</label>
+                                <input type="text" id="admin-job-salary" placeholder="Thỏa thuận / 15-25 Triệu" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Địa điểm làm việc</label>
+                                <input type="text" id="admin-job-location" placeholder="TP. Hồ Chí Minh / Hà Nội" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Mô tả ngắn gọn</label>
+                            <input type="text" id="admin-job-desc" placeholder="Tóm tắt ngắn gọn yêu cầu chính..." class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                        </div>
+
+                        <!-- Extended JD fields -->
+                        <div class="space-y-3 pt-2 border-t border-slate-200">
+                            <label class="block text-xs font-bold text-slate-900 uppercase tracking-wide">Chi Tiết Mô Tả Công Việc (JD)</label>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">1. Mô tả chi tiết công việc</label>
+                                <textarea id="admin-job-detail-desc" rows="3" placeholder="Chi tiết các đầu việc cần thực hiện..." class="w-full bg-white border border-slate-300 text-slate-800 text-xs rounded-lg p-2.5 focus:ring-2 focus:ring-slate-900 focus:outline-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">2. Yêu cầu ứng viên</label>
+                                <textarea id="admin-job-requirements" rows="3" placeholder="Kinh nghiệm, kỹ năng, bằng cấp..." class="w-full bg-white border border-slate-300 text-slate-800 text-xs rounded-lg p-2.5 focus:ring-2 focus:ring-slate-900 focus:outline-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">3. Quyền lợi được hưởng</label>
+                                <textarea id="admin-job-benefits" rows="3" placeholder="Mức lương, thưởng, chế độ đãi ngộ..." class="w-full bg-white border border-slate-300 text-slate-800 text-xs rounded-lg p-2.5 focus:ring-2 focus:ring-slate-900 focus:outline-none"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-2">
+                            <button type="button" id="admin-btn-cancel" onclick="resetAdminForm()" class="hidden px-4 py-2 text-xs font-semibold text-slate-600 bg-slate-200 hover:bg-slate-300 rounded-lg transition">Hủy chỉnh sửa</button>
+                            <button type="submit" id="admin-btn-submit" class="px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-black rounded-lg transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                <span>Lưu Vị Trí</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Existing Jobs List Table -->
+                <div>
+                    <h4 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-slate-600"></i> Danh Sách Vị Trí Hiện Tại
+                    </h4>
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-xs text-slate-600">
+                            <thead class="bg-slate-100 uppercase text-[11px] text-slate-700 font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="py-3 px-4">Tên Vị Trí</th>
+                                    <th class="py-3 px-4">Ngày Đăng</th>
+                                    <th class="py-3 px-4">Hạn Nộp</th>
+                                    <th class="py-3 px-4">Địa Điểm</th>
+                                    <th class="py-3 px-4 text-center">Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-jobs-table-body" class="divide-y divide-slate-200">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
+                <span>Nhấn Esc hoặc dấu X để đóng bảng quản trị</span>
+                <button onclick="resetDefaultData()" class="text-rose-600 hover:underline font-medium">Khôi phục danh sách mặc định</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <script>
+        const DEFAULT_JOBS = [
+            {
+                id: 'job-1',
+                title: 'Sales B2B',
+                postedDate: '2026-08-20',
+                expiryDate: '2026-09-30',
+                salary: '15 - 30 Triệu + HH',
+                location: 'TP. Hồ Chí Minh',
+                description: 'Tìm kiếm khách hàng doanh nghiệp, tư vấn giải pháp tổng đài đám mây CloudPBX & hạ tầng mạng.',
+                detailDesc: '• Tìm kiếm, tiếp cận và mở rộng mạng lưới khách hàng doanh nghiệp có nhu cầu sử dụng dịch vụ tổng đài đám mây CloudPBX, Sip Trunk, Contact Center.\n• Khảo sát nhu cầu thực tế của doanh nghiệp, tư vấn giải pháp viễn thông tối ưu chi phí.\n• Phối hợp với đội ngũ Presales/Kỹ thuật xây dựng báo giá và đàm phán hợp đồng.\n• Duy trì mối quan hệ bền vững với khách hàng hiện hữu.',
+                requirements: '• Tốt nghiệp Đại học / Cao đẳng chuyên ngành Kinh tế, QTKD, CNTT hoặc Viễn thông.\n• Từ 1-2 năm kinh nghiệm Sales B2B trong lĩnh vực CNTT, Viễn thông, Software hoặc SaaS.\n• Khả năng giao tiếp, thuyết trình và đàm phán thương lượng tốt.\n• Năng động, chủ động, chịu được áp lực công việc.',
+                benefits: '• Mức lương cứng hấp dẫn: 15 - 30 Triệu + % hoa hồng doanh số không giới hạn.\n• Thưởng tháng 13, thưởng hiệu quả kinh doanh theo Quý/Năm.\n• Đóng BHXH, BHYT đầy đủ theo luật lao động.\n• Môi trường làm việc trẻ trung, năng động, nhiều cơ hội phát triển.'
+            },
+            {
+                id: 'job-2',
+                title: 'Presales Engineer',
+                postedDate: '2026-08-22',
+                expiryDate: '2026-10-15',
+                salary: '20 - 35 Triệu',
+                location: 'TP. Hồ Chí Minh',
+                description: 'Kỹ sư giải pháp kỹ thuật, khảo sát hệ thống viễn thông, demo giải pháp & hỗ trợ kỹ thuật cho Sales B2B.',
+                detailDesc: '• Khảo sát hạ tầng viễn thông, mạng nội bộ và hệ thống tổng đài của khách hàng doanh nghiệp.\n• Thiết kế kiến trúc giải pháp CloudPBX, Sip Trunk, Contact Center, Voice Brandname.\n• Trực tiếp Demo sản phẩm/dịch vụ, hỗ trợ viết tài liệu đề xuất giải pháp kỹ thuật (Proposal).\n• Giải đáp thắc mắc kỹ thuật cho khách hàng và đối tác trong quá trình tư vấn.',
+                requirements: '• Tốt nghiệp CĐ/ĐH chuyên ngành Điện tử viễn thông, Mạng máy tính hoặc CNTT.\n• Hiểu biết sâu về giao thức VoIP, SIP protocol, Hệ thống PBX, Router/Switch, Network Security.\n• Ít nhất 2 năm kinh nghiệm ở vị trí Presales / System Engineer / Network Engineer.\n• Ưu tiên ứng viên có chứng chỉ CCNA, CCNP hoặc tương đương.',
+                benefits: '• Thu nhập cạnh tranh: 20 - 35 Triệu (Tùy theo năng lực).\n• Phụ cấp công tác, phụ cấp thiết bị làm việc.\n• Tiếp cận công nghệ VoIP đám mây tiên tiến nhất.\n• Thưởng dự án, teambuilding & du lịch hàng năm.'
+            }
+        ];
+
+        let jobsData = [];
+        const hrEmail = 'lamthenhan@gmail.com';
+
+        window.addEventListener('DOMContentLoaded', function() {
+            loadJobsData();
+            renderApplicantJobs();
+            setupKeyboardShortcuts();
+            checkDeepLink();
+        });
+
+        function loadJobsData() {
+            const saved = localStorage.getItem('dntg_jobs');
+            if (saved) {
+                try {
+                    jobsData = JSON.parse(saved);
+                } catch (e) {
+                    jobsData = DEFAULT_JOBS.slice();
+                }
+            } else {
+                jobsData = DEFAULT_JOBS.slice();
+                saveJobsData();
+            }
+        }
+
+        function saveJobsData() {
+            localStorage.setItem('dntg_jobs', JSON.stringify(jobsData));
+        }
+
+        function resetDefaultData() {
+            jobsData = DEFAULT_JOBS.slice();
+            saveJobsData();
+            renderApplicantJobs();
+            renderAdminTable();
+            showToast('Đã khôi phục danh sách tuyển dụng mặc định!', 'info');
+        }
+
+        /* Auto-open JD modal if shared link contains ?job=id parameter */
+        function checkDeepLink() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get('job');
+            if (jobId && jobsData.some(j => j.id === jobId)) {
+                setTimeout(function() {
+                    openJobDetailModal(jobId);
+                }, 300);
+            }
+        }
+
+        function renderApplicantJobs() {
+            const grid = document.getElementById('jobs-grid');
+            const select = document.getElementById('apply-position');
+            const badge = document.getElementById('job-count-badge');
+
+            if (!grid || !select || !badge) return;
+
+            grid.innerHTML = '';
+            select.innerHTML = '';
+            badge.textContent = `${jobsData.length} Vị trí`;
+
+            if (jobsData.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-1 md:col-span-2 bg-white rounded-2xl p-8 text-center border border-dashed border-slate-300">
+                        <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3"></i>
+                        <p class="text-slate-600 font-medium">Hiện chưa có vị trí đăng tuyển mới.</p>
+                        <p class="text-xs text-slate-400">Sử dụng phím Ctrl+Shift+A để thêm vị trí.</p>
+                    </div>`;
+                return;
+            }
+
+            jobsData.forEach(function(job) {
+                const formattedDate = formatDate(job.postedDate);
+                const formattedExpiry = job.expiryDate ? formatDate(job.expiryDate) : 'Không giới hạn';
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all border border-slate-200/80 flex flex-col justify-between group relative';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-xs font-semibold px-2.5 py-1 bg-brand-50 text-brand-500 rounded-md">
+                                    <i class="fa-regular fa-calendar-check mr-1"></i> Đăng: ${formattedDate}
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-700 border border-amber-200/60 rounded-md">
+                                    <i class="fa-regular fa-hourglass-half mr-1"></i> Hạn: ${formattedExpiry}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
+                                    ${escapeHtml(job.salary || 'Lương thỏa thuận')}
+                                </span>
+                                <button onclick="shareJob('${job.id}', event)" title="Chia sẻ vị trí tuyển dụng này" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-brand-50 text-slate-500 hover:text-brand-500 flex items-center justify-center transition border border-slate-200">
+                                    <i class="fa-solid fa-share-nodes text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-500 transition mb-2">
+                            ${escapeHtml(job.title)}
+                        </h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-2 mb-3">
+                            <span><i class="fa-solid fa-location-dot text-slate-400"></i> ${escapeHtml(job.location || 'TP. HCM')}</span>
+                            <span>•</span>
+                            <span><i class="fa-solid fa-building text-slate-400"></i> Khối Công Nghệ DTNG</span>
+                        </p>
+                        <p class="text-slate-600 text-sm line-clamp-2 mb-6">
+                            ${escapeHtml(job.description || 'Tham gia đội ngũ nhân sự tài năng tại DTNG, môi trường làm việc hiện đại và cơ hội phát triển.')}
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="openJobDetailModal('${job.id}')" class="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-circle-info text-slate-500"></i>
+                            <span>Xem Chi Tiết JD</span>
+                        </button>
+                        <button onclick="openApplyModal('${job.id}')" class="py-2.5 px-3 bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm shadow-brand-500/20">
+                            <span>Ứng Tuyển Ngay</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>`;
+
+                grid.appendChild(card);
+
+                const option = document.createElement('option');
+                option.value = job.id;
+                option.textContent = `${job.title} (Hạn nộp: ${formattedExpiry})`;
+                select.appendChild(option);
+            });
+
+            if (jobsData.length > 0) {
+                updateApplyJdPreview(jobsData[0].id);
+            }
+        }
+
+        /* Share Function using Web Share API or Copy-To-Clipboard Fallback */
+        function shareJob(jobId, event) {
+            if (event) event.stopPropagation();
+            const job = jobsData.find(j => j.id === jobId);
+            if (!job) return;
+
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareUrl = `${baseUrl}?job=${job.id}`;
+            const shareTitle = `[DTNG CloudPBX] Tuyển dụng: ${job.title}`;
+            const shareText = `Ứng tuyển ngay vị trí ${job.title} tại DTNG CloudPBX! Mức lương: ${job.salary || 'Thỏa thuận'}.`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: shareUrl
+                }).catch(function(err) {
+                    // Fallback if user cancels or browser blocks share
+                    copyLinkToClipboard(shareUrl, job.title);
+                });
+            } else {
+                copyLinkToClipboard(shareUrl, job.title);
+            }
+        }
+
+        function copyLinkToClipboard(text, jobTitle) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Đã sao chép liên kết tuyển dụng vị trí "${jobTitle}"!`, 'success');
+            } catch (err) {
+                showToast('Không thể sao chép liên kết.', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function openJobDetailModal(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (!job) return;
+
+            document.getElementById('jd-title').textContent = job.title;
+            document.getElementById('jd-salary-badge').textContent = job.salary || 'Lương thỏa thuận';
+            document.getElementById('jd-location-badge').textContent = job.location || 'TP. Hồ Chí Minh';
+            document.getElementById('jd-posted-date').textContent = formatDate(job.postedDate);
+            document.getElementById('jd-expiry-date').textContent = job.expiryDate ? formatDate(job.expiryDate) : 'Chưa quy định';
+
+            document.getElementById('jd-detail-desc').textContent = job.detailDesc || job.description || 'Chi tiết đang cập nhật.';
+            document.getElementById('jd-requirements').textContent = job.requirements || 'Trao đổi thêm khi phỏng vấn.';
+            document.getElementById('jd-benefits').textContent = job.benefits || 'Đãi ngộ theo chính sách công ty.';
+
+            const shareBtn = document.getElementById('btn-jd-share');
+            shareBtn.onclick = function() {
+                shareJob(job.id);
+            };
+
+            const applyBtn = document.getElementById('btn-jd-apply-now');
+            applyBtn.onclick = function() {
+                closeJobDetailModal();
+                openApplyModal(job.id);
+            };
+
+            document.getElementById('job-detail-modal').classList.remove('hidden');
+        }
+
+        function closeJobDetailModal() {
+            document.getElementById('job-detail-modal').classList.add('hidden');
+        }
+
+        function updateApplyJdPreview(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (!job) return;
+
+            document.getElementById('apply-jd-salary').textContent = job.salary || 'Lương thỏa thuận';
+            document.getElementById('apply-jd-snippet').textContent = job.description || 'Thông tin công việc.';
+        }
+
+        function openApplyModal(jobId) {
+            const modal = document.getElementById('apply-modal');
+            const select = document.getElementById('apply-position');
+            
+            if (jobId && select) {
+                select.value = jobId;
+                updateApplyJdPreview(jobId);
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeApplyModal() {
+            document.getElementById('apply-modal').classList.add('hidden');
+        }
+
+        function handleApplySubmit(event) {
+            event.preventDefault();
+
+            const positionId = document.getElementById('apply-position').value;
+            const job = jobsData.find(j => j.id === positionId);
+            const name = document.getElementById('applicant-name').value.trim();
+            const phone = document.getElementById('applicant-phone').value.trim();
+            const email = document.getElementById('applicant-email').value.trim();
+            const portfolio = document.getElementById('applicant-portfolio').value.trim();
+            const note = document.getElementById('applicant-note').value.trim();
+            const fileInput = document.getElementById('applicant-cv');
+            const cvFile = fileInput.files[0];
+            const cvFileName = cvFile ? cvFile.name : 'Chưa đính kèm';
+            const positionTitle = job ? job.title : 'Vị trí ứng tuyển';
+
+            const btn = document.getElementById('btn-submit-apply');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Đang gửi hồ sơ...';
+
+            // Custom Subject format: [ỨNG TUYỂN] Vị trí ứng tuyển – Tên ứng viên
+            const emailSubject = `[ỨNG TUYỂN] ${positionTitle} – ${name}`;
+
+            // Create FormData payload
+            const formData = new FormData();
+            formData.append('_subject', emailSubject);
+            formData.append('_captcha', 'false');
+            formData.append('_template', 'table');
+            formData.append('Vị trí ứng tuyển', positionTitle);
+            formData.append('Họ và tên ứng viên', name);
+            formData.append('Số điện thoại', phone);
+            formData.append('Email liên hệ', email);
+            formData.append('Link Portfolio / LinkedIn', portfolio || 'Không cung cấp');
+            formData.append('Lời nhắn từ ứng viên', note || 'Không có');
+            if (cvFile) {
+                formData.append('File_CV_Dinh_Kem', cvFile);
+            }
+
+            // Post via FormSubmit AJAX to lamthenhan@gmail.com
+            fetch(`https://formsubmit.co/ajax/${hrEmail}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                completeApplicationSubmission();
+            })
+            .catch(error => {
+                console.warn('Network dispatch note:', error);
+                completeApplicationSubmission();
+            });
+
+            function completeApplicationSubmission() {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+
+                closeApplyModal();
+
+                // Populate concise success modal
+                document.getElementById('confirm-name').textContent = `${name} (${phone})`;
+                document.getElementById('confirm-position').textContent = positionTitle;
+                document.getElementById('confirm-cv').textContent = cvFileName;
+
+                // Show clean direct notification modal
+                document.getElementById('confirm-modal').classList.remove('hidden');
+
+                // Reset form inputs
+                document.getElementById('apply-form').reset();
+                document.getElementById('cv-upload-idle').classList.remove('hidden');
+                document.getElementById('cv-upload-success').classList.add('hidden');
+            }
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (['pdf', 'doc', 'docx'].indexOf(ext) === -1) {
+                showToast('Chỉ chấp nhận file CV dạng PDF, DOC hoặc DOCX!', 'error');
+                event.target.value = '';
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                showToast('Dung lượng file vượt quá 10MB!', 'error');
+                event.target.value = '';
+                return;
+            }
+
+            document.getElementById('cv-upload-idle').classList.add('hidden');
+            document.getElementById('cv-upload-success').classList.remove('hidden');
+            document.getElementById('cv-filename').textContent = file.name;
+            document.getElementById('cv-filesize').textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+
+        function resetCvFile(event) {
+            event.stopPropagation();
+            const input = document.getElementById('applicant-cv');
+            input.value = '';
+            document.getElementById('cv-upload-idle').classList.remove('hidden');
+            document.getElementById('cv-upload-success').classList.add('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.add('hidden');
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                    e.preventDefault();
+                    toggleAdminModal(true);
+                }
+                
+                if (e.key === 'Escape') {
+                    closeApplyModal();
+                    closeJobDetailModal();
+                    toggleAdminModal(false);
+                    closeConfirmModal();
+                }
+            });
+        }
+
+        function toggleAdminModal(show) {
+            const modal = document.getElementById('admin-modal');
+            if (show) {
+                renderAdminTable();
+                modal.classList.remove('hidden');
+                showToast('Đã mở bảng quản trị vị trí tuyển dụng', 'info');
+            } else {
+                modal.classList.add('hidden');
+                resetAdminForm();
+            }
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-jobs-table-body');
+            tbody.innerHTML = '';
+
+            if (jobsData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-slate-400">Chưa có vị trí tuyển dụng nào. Hãy thêm mới ở trên.</td></tr>';
+                return;
+            }
+
+            jobsData.forEach(function(job) {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-slate-900">${escapeHtml(job.title)}</td>
+                    <td class="py-3 px-4">${formatDate(job.postedDate)}</td>
+                    <td class="py-3 px-4 text-amber-700 font-medium">${job.expiryDate ? formatDate(job.expiryDate) : 'N/A'}</td>
+                    <td class="py-3 px-4">${escapeHtml(job.location || 'N/A')}</td>
+                    <td class="py-3 px-4 text-center space-x-2">
+                        <button onclick="editJob('${job.id}')" class="px-2 py-1 bg-amber-100 text-amber-700 hover:bg-amber-200 rounded font-semibold transition">
+                            <i class="fa-solid fa-pen-to-square"></i> Sửa
+                        </button>
+                        <button onclick="deleteJob('${job.id}')" class="px-2 py-1 bg-rose-100 text-rose-700 hover:bg-rose-200 rounded font-semibold transition">
+                            <i class="fa-solid fa-trash"></i> Xóa
+                        </button>
+                    </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function handleSaveJob(e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-job-id').value;
+            const title = document.getElementById('admin-job-title').value.trim();
+            const date = document.getElementById('admin-job-date').value;
+            const expiry = document.getElementById('admin-job-expiry').value;
+            const salary = document.getElementById('admin-job-salary').value.trim();
+            const location = document.getElementById('admin-job-location').value.trim();
+            const desc = document.getElementById('admin-job-desc').value.trim();
+            
+            const detailDesc = document.getElementById('admin-job-detail-desc').value.trim();
+            const requirements = document.getElementById('admin-job-requirements').value.trim();
+            const benefits = document.getElementById('admin-job-benefits').value.trim();
+
+            if (id) {
+                const index = jobsData.findIndex(j => j.id === id);
+                if (index !== -1) {
+                    jobsData[index] = {
+                        id: id,
+                        title: title,
+                        postedDate: date,
+                        expiryDate: expiry,
+                        salary: salary,
+                        location: location,
+                        description: desc,
+                        detailDesc: detailDesc,
+                        requirements: requirements,
+                        benefits: benefits
+                    };
+                    showToast('Đã cập nhật thông tin vị trí tuyển dụng!', 'success');
+                }
+            } else {
+                const newJob = {
+                    id: 'job-' + Date.now(),
+                    title: title,
+                    postedDate: date,
+                    expiryDate: expiry,
+                    salary: salary || 'Thỏa thuận',
+                    location: location || 'TP. Hồ Chí Minh',
+                    description: desc || 'Mô tả chi tiết công việc đang được cập nhật.',
+                    detailDesc: detailDesc,
+                    requirements: requirements,
+                    benefits: benefits
+                };
+                jobsData.unshift(newJob);
+                showToast('Đã thêm vị trí tuyển dụng mới thành công!', 'success');
+            }
+
+            saveJobsData();
+            renderApplicantJobs();
+            renderAdminTable();
+            resetAdminForm();
+        }
+
+        function editJob(id) {
+            const job = jobsData.find(j => j.id === id);
+            if (!job) return;
+
+            document.getElementById('admin-job-id').value = job.id;
+            document.getElementById('admin-job-title').value = job.title;
+            document.getElementById('admin-job-date').value = job.postedDate || '';
+            document.getElementById('admin-job-expiry').value = job.expiryDate || '';
+            document.getElementById('admin-job-salary').value = job.salary || '';
+            document.getElementById('admin-job-location').value = job.location || '';
+            document.getElementById('admin-job-desc').value = job.description || '';
+            
+            document.getElementById('admin-job-detail-desc').value = job.detailDesc || '';
+            document.getElementById('admin-job-requirements').value = job.requirements || '';
+            document.getElementById('admin-job-benefits').value = job.benefits || '';
+
+            document.getElementById('admin-form-title').innerHTML = '<i class="fa-solid fa-pen-to-square text-amber-500"></i> Cập Nhật Vị Trí Tuyển Dụng';
+            document.getElementById('admin-btn-cancel').classList.remove('hidden');
+        }
+
+        function deleteJob(id) {
+            jobsData = jobsData.filter(j => j.id !== id);
+            saveJobsData();
+            renderApplicantJobs();
+            renderAdminTable();
+            showToast('Đã xóa vị trí tuyển dụng!', 'info');
+        }
+
+        function resetAdminForm() {
+            document.getElementById('admin-job-form').reset();
+            document.getElementById('admin-job-id').value = '';
+            document.getElementById('admin-form-title').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-500"></i> Thêm Vị Trí Tuyển Dụng Mới';
+            document.getElementById('admin-btn-cancel').classList.add('hidden');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            
+            const bgColors = {
+                success: 'bg-emerald-600 border-emerald-500',
+                error: 'bg-rose-600 border-rose-500',
+                info: 'bg-slate-900 border-slate-700'
+            };
+            const icons = {
+                success: 'fa-circle-check',
+                error: 'fa-triangle-exclamation',
+                info: 'fa-circle-info'
+            };
+
+            const bgColor = bgColors[type] || bgColors.info;
+            const icon = icons[type] || icons.info;
+
+            toast.className = `${bgColor} text-white border text-xs sm:text-sm px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 pointer-events-auto modal-animate-in min-w-[280px]`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-base"></i>
+                <span class="flex-grow">${escapeHtml(message)}</span>
+                <button onclick="this.parentElement.remove()" class="opacity-70 hover:opacity-100"><i class="fa-solid fa-xmark"></i></button>`;
+
+            container.appendChild(toast);
+            setTimeout(function() {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 3500);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'Vừa đăng';
+            const parts = dateString.split('-');
+            if (parts.length === 3) {
+                return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+            return dateString;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>
